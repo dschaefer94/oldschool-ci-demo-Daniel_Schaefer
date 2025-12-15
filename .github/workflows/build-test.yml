@@ -22,9 +22,9 @@ jobs:
 
       - name: Container starten & testen
         run: |
-          output=$(docker run --rm oldschool-test-image)
+          output=$(docker run oldschool-test-image)
           echo "$output"
-          if [ "$output" != "OldSchool GmbH - automatischer Build erfolgreich!" (Daniel S.)]; then
+          if [ "$output" != "OldSchool GmbH - automatischer Build erfolgreich! (Daniel S.)]; then
             echo "Test fehlgeschlagen :(!"
             exit 1
           fi
