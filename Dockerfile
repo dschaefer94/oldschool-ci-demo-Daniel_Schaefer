@@ -8,4 +8,4 @@
 		RUN chmod +x /app.sh
 		
 		# Container startet mit dem Skript
-    ENTRYPOINT ["/app.sh"]
+    CMD ["/app.sh"]
