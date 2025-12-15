@@ -18,14 +18,6 @@ jobs:
       - name: Docker-Image bauen
         run: |
           docker build -t oldschool-test-image .
-
-      - name: Container starten
-        run: |
-          docker logs demo_container
-      
-      - name: Ausgabe testen
-        run: |
-          docker logs demo_container
         
       - name: Container starten & testen
         run: |
@@ -35,6 +27,3 @@ jobs:
           echo "Test fehlgeschlagen!"
           exit 1
           fi
-
-          
-
