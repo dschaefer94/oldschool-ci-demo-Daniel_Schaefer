@@ -1,0 +1,26 @@
+name: OldSchool-CICD
+on:
+  push: branches:[*]
+jobs:
+  build_and_test
+   runs-on: ubuntu-latest
+steps:
+  -name: Repo outchecken
+  uses: actions/checkout@v3
+  -name Docker installieren
+  run: |
+    sudo apt-get update
+    sudo apt-get install -y docker.io
+  -name Docker-Image bauen
+  run: |
+  docker build -t oldschool-test-image
+	-name: Container starten & testen
+  run: |
+    output=$(docker run oldschool-test-image)
+    echo "$output"
+    if [ "$output" != "OldSchool GmbH - automatischer Build erfolgreich!" ]; then
+      echo "Test fehlgeschlagen! :()"
+      exit 1
+    fi
+
+
