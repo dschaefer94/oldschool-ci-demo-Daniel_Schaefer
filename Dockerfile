@@ -8,4 +8,4 @@
 		RUN chmod +x /app.sh
 		
 		# Container startet mit dem Skript
-    CMD ["dos2unix /app.sh"]
+    ENTRYPOINT ["/app.sh"]
