@@ -2,8 +2,6 @@ name: OldSchool-CICD
 
 on:
   push:
-    branches:
-      - "*"
 
 jobs:
   build_and_test:
@@ -11,21 +9,32 @@ jobs:
 
     steps:
       - name: Repo auschecken
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Docker-Version prüfen
-        run: docker --version
+      - name: Docker-installieren
+        run: |
+         docker --version
 
       - name: Docker-Image bauen
         run: |
           docker build -t oldschool-test-image .
 
+      - name: Container starten
+        run: |
+          docker logs demo_container
+      
+      - name: Ausgabe testen
+        run: |
+          docker logs demo_container
+        
       - name: Container starten & testen
         run: |
           output=$(docker run oldschool-test-image)
           echo "$output"
-          if [ "$output" != "OldSchool GmbH - automatischer Build erfolgreich! (Daniel S.)]; then
-            echo "Test fehlgeschlagen :(!"
-            exit 1
+          if [ "$output" != "OldSchool GmbH - automatischer Build erfolgreich! (Daniel S.)"]; then
+          echo "Test fehlgeschlagen!"
+          exit 1
           fi
+
+          
 
